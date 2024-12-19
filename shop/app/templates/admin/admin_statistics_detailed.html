@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}statistics{% endblock %}
+{% block content %}
+<a href="{% url 'statistics' %}">Назад</a>
+<form>
+    <table>
+        <tr>
+            <td>Начиная с</td>
+            <td><input type="date" name="start"></td>
+        </tr>
+        <tr>
+            <td>Заканчивая </td>
+            <td><input type="date" name="finish" value="{{now}}"></td>
+        </tr>
+    </table>
+    <input type="submit" value="Искать">
+</form>
+<table>
+    <tr>
+        <td><h3>Наименование товара</h3></td>
+        <td><h3>Количество покупок</h3></td>
+        <td><h3>Дата</h3></td>
+    </tr>
+    {% for sale in sells %}
+
+    <tr>
+        <td><h3>{{sale.product.name}}</h3></td>
+        <td><h3>{{sale.count}}</h3></td>
+        <td><h3>{{sale.date}}</h3></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

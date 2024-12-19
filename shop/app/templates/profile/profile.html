@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+
+    <h1>Профиль {{user.username}}</h1>
+    <h2>Ваши данные:</h2>
+    <h4>Имя: {{user.username}}</h4>
+    <h4>Почта: {{user.email}}</h4>
+    {% if user.phone_number != None %}
+    <h4>Номер телефона: {{user.phone_number}}</h4>
+    {% else %}
+    <h4>Номер телефона: неуказан</h4>
+    {% endif %}
+    <a style="text-decoration: none;" class="home__a" href="{% url 'change_info' %}">Изменить данные</a><br>
+    <a style="text-decoration: none;" class="home__a"href="{% url 'update' %}">Изменить пароль</a>
+    <h2>Корзина:</h2>
+    <form method="post">
+<table>
+{% csrf_token %}
+    <tr>
+        <td>Название</td>
+        <td>Цена</td>
+        <td>Категория</td>
+        <td>Количество</td>
+        <td> </td>
+    </tr>
+    {% for product in user.cart.all %}
+    <tr>
+        <td>{{product.name}}</td>
+        <td>{{product.prise}}</td>
+        <td>{{product.type}}</td>
+        <td><input type="number" id="{{product.id}}" name="{{product.id}}" min="0" value="0" max="{{product.count}}"></td>
+        <td><a  href="{{product.id}}">удалить</a></td>
+    </tr>
+
+{%endfor%}
+
+
+
+    </table>
+        <input class="profile__btn btn home__a" type="submit" value="Заказать">
+</form>
+
+
+    {% if user.is_staff  %}
+    <a href="{% url 'admin'%}">Админ панель</a>
+    {%endif%}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}statistics{% endblock %}
+{% block content %}
+<a href="{% url 'analitic_list' %}">Назад</a>
+<table>
+    <tr>
+        <td><h3>Наименование товара</h3></td>
+        <td><h3>Количество покупок</h3></td>
+        <td><h3>Количество посещений</h3></td>
+        <td><h3>% посещений с покупкой</h3></td>
+        <td><h3>Цена</h3></td>
+        <td><h3>Себестоимость</h3></td>
+        <td><h3>Доход</h3></td>
+        <td><h3>Оценка</h3></td>
+        <td><h3>Количесво отзывов</h3></td>
+    </tr>
+    <tr>
+        <td><h3>{{list_sell.product.name}}</h3></td>
+        <td><h3>{{list_sell.count}}</h3></td>
+        <td><h3>{{list_sell.flyers}}</h3></td>
+        <td><h3>{{of_by}}</h3></td>
+        <td><h3>{{list_sell.product.prise}}</h3></td>
+        <td><h3>{{list_sell.product.cost_price}}</h3></td>
+        <td><h3>{{money}}</h3></td>
+        <td><h3>{{list_sell.product.numm_evaluation}}</h3></td>
+        <td><h3>{{list_sell.product.count_evaluation}}</h3></td>
+        <td>
+</table>
+{% endblock %}

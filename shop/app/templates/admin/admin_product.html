@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+{% if user.is_staff%}
+<a href="{% url 'admin' %}">Назад</a>
+    <form method="post">
+        {% csrf_token %}
+        {{ form_product.as_table }}
+        <input type="submit">
+    </form>
+<hr>
+{%else%}
+<h1>Для тебя тут ничего нет</h1>
+{%endif%}
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+{% if user.is_staff%}
+<a href="{% url 'statistics' %}">Назад</a><br><br><br>
+    {% for product in products %}
+<a href="{{product.id}}">{{product.name}}</a>
+<hr>
+{%endfor%}
+
+{%else%}
+<h1>Для тебя тут ничего нет</h1>
+{%endif%}
+
+{% endblock %}

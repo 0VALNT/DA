@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}statistics{% endblock %}
+{% block content %}
+<a href="{% url 'admin' %}">Назад</a>
+<a href="{% url 'detail_statistics' %}">Подробнее</a>
+<a href="{% url 'analitic_list' %}">Аналитика</a>
+<table>
+    <tr>
+        <td><h3>Наименование товара</h3></td>
+        <td><h3>Количество покупок</h3></td>
+    </tr>
+    {% for AdminSellList in AdminSellLists %}
+
+    <tr>
+        <td><h3>{{AdminSellList.product.name}}</h3></td>
+        <td><h3>{{AdminSellList.count}}</h3></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

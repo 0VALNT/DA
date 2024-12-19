@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+    {% if user.is_staff %}
+<form method="post">
+  {% csrf_token %}
+  <table>
+    <tr>
+      <td>Название</td>
+      <td><input type="text" name="name" required maxlength="50" value="{{product.name}}"></td>
+    </tr>
+    <tr>
+      <td>Цена</td>
+      <td><input type="number"  step="any" required name="prise" min="0" value="{{product.prise}}"></td>
+    </tr>
+    <tr>
+      <td>URL</td>
+      <td><input type="url" name="img_url" required value="{{product.img_url}}"></td>
+    </tr>
+      <tr>
+      <td>Количество</td>
+      <td><input type="number" name="count" required value="{{product.count}}" min="0"></td>
+    </tr>
+    <tr>
+      <td>Себестоимость</td>
+      <td><input type="number" step="any" name="cost_price" required value="{{product.cost_price}}" min="0"></td>
+    </tr>
+    <tr>
+      <td>Тип</td>
+      <td>
+   <select name="type" id="type__select">
+            {% for type in types %}
+          <option name="type" value="{{type.id}}">{{type}}</option>
+     {% endfor %}
+  </select>
+      </td>
+    </tr>
+  </table>
+  <input type="submit">
+</form>
+    {% endif %}
+{% endblock %}

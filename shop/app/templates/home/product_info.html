@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+    <a style="text-decoration: none;" class="home__a" href="{% url 'home' %}">Назад</a>
+<div class="wrapper__info">
+    <div class="product__info">
+        <img class="info__img" src="{{product.img_url}}">
+    {{product.name}}
+    {{product.price}}
+    ({{product.type}})
+    {{product.prise}}
+    <p>Количество: {{product.count}}</p>
+    <p>Оценка: {{product.numm_evaluation}}</p>
+    <p>Количество оценок: {{product.count_evaluation}}</p>
+        </div>
+
+    {% if product.count == 0 %}
+    <a style="text-decoration: none;" class="home__a count__zero " href="{% url 'buy' product.id %}">Заказать</a>
+    {% else %}
+    <a style="text-decoration: none;" class="home__a"  href="{% url 'buy' product.id %}">Заказать</a>
+    {%endif%}
+
+
+
+    {% if user.is_staff %}
+    <a href="{% url 'change_product' product.id %}">Изменить</a>
+    <a href="{% url 'delete_product' product.id %}">Удалить</a>
+    {% endif %}
+    <hr>
+    </div>
+<form method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>Оценка от 0 до 10</td>
+            <td><input name="evaluation" type="number" min="0" max="10"></td>
+        </tr>
+        <tr>
+            <td>Что вы бы хотели сказать насчёт продукта?</td>
+            <td><textarea name="text" cols="30" rows="10" ></textarea></td>
+
+        </tr>
+    </table>
+    <input type="submit" value="Оставить отзыв">
+</form>
+<hr>
+{% for evaluation in evaluations %}
+<h2>{{evaluation.user.username}}</h2>
+<h3>Оценка: {{evaluation.evaluation}}</h3>
+<p class="evaluation__p">{{evaluation.text}}</p>
+<hr>
+{% endfor %}
+{% endblock %}

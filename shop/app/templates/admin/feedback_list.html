@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+{% if user.is_staff%}
+<a href="{% url 'admin' %}">Назад</a>
+<table>
+    <tr>
+        <td>Пользователь</td>
+        <td>Проблема</td>
+        <td>Описание</td>
+        <td> </td>
+    </tr>
+    <tr>
+    {% for feedback in feedbacks %}
+
+
+
+        <td>{{feedback.user.username}}</td>
+        <td>{{feedback.question}}</td>
+        <td>{{feedback.description}}</td>
+        <td><a href="{{ feedback.id }}">Закрыть без ответа</a></td>
+        <td><a href="{% url 'feedback_answer' feedback.id %}">Закрыть c ответом</a></td>
+    </tr>
+
+
+<hr>
+{%endfor%}
+
+    </table>
+{%else%}
+<h1>Для тебя тут ничего нет</h1>
+{%endif%}
+
+{% endblock %}

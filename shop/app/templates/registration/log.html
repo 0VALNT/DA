@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+
+    <button type="submit">Войти</button>
+    <div style="color:red;">{{errors}}</div>
+</form>
+Ещё нет аккаунта? <a href="{% url 'signup' %}">Зарегистрироваться</a><br>
+<a href="{% url 'password_reset' %}">Забыли пароль?</a>
+{% endblock %}

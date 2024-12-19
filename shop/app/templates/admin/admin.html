@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+{% if user.is_staff%}
+<a href="{% url 'create_type' %}">Создать тип</a>
+<hr>
+<a href="{% url 'create_product' %}">Создать товар</a>
+<hr>
+<a href="{% url 'feedback_list' %}">Обратная связь</a>
+<hr>
+<a href="{% url 'statistics' %}">Список покупок</a>
+<hr>
+    {% for order in orders %}
+Заказ {{order.user.username}}: <a href="{{order.id}}">Завершить заказ</a>
+<table>
+    <tr>
+        <td>Название</td>
+        <td>Цена</td>
+        <td>Категория</td>
+        <td>Количество</td>
+    </tr>
+    <tr>
+    {% for count in order.count.all %}
+
+        <td>{{count.product.name}}</td>
+        <td>{{count.product.prise}}</td>
+        <td>{{count.product.type}}</td>
+        <td>{{count.count}}</td>
+    </tr>
+
+{%endfor%}
+    </table>
+    Общяя цена: {{order.prise}}
+<hr>
+{%endfor%}
+
+{%else%}
+<h1>Для тебя тут ничего нет</h1>
+{%endif%}
+
+{% endblock %}

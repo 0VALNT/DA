@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<form>
+    <input type="search" name="name" value="{{name}}">
+       <select name="type" id="type__select">
+           <option name="type" value="">------</option>
+            {% for type in types %}
+          <option name="type" value="{{type.id}}">{{type}}</option>
+     {% endfor %}
+       </select>
+    <input type="submit" value="Искать">
+</form>
+{% if most %}
+<div class="most__wrapper wrapper">
+    <div class="home__title">Самый покупаемый товар за неделю</div>
+    <div class="cart">
+        <div class="cart__title">
+            <h3>
+                {{most.name}}
+            </h3>
+        </div>
+    <img class = 'cart__img' src="{{most.img_url}}">
+    {{most.price}}
+    ({{most.type}})
+    {{most.prise}}
+        <p>Оценка: {{most.numm_evaluation}}</p>
+        <div ><a style="text-decoration: none;" class="home__a" href="{{ most.id }}">Подробнее</a></div>
+
+    </div>
+
+
+
+
+</div>
+{% endif %}
+
+<div class="wrapper">
+    {% for product in products%}
+    <div class="cart">
+        <div class="cart__title">
+            <h3>
+                {{product.name}}
+            </h3>
+        </div>
+    <img class = 'cart__img' src="{{product.img_url}}">
+    {{product.price}}
+    ({{product.type}})
+    {{product.prise}}
+        <p>Оценка: {{product.numm_evaluation}}</p>
+        <div ><a style="text-decoration: none;" class="home__a" href="{{ product.id }}">Подробнее</a></div>
+
+    </div>
+
+
+
+
+{%endfor%}
+</div>
+<footer class="footer">
+    <div class="link"><a style="text-decoration: none;" class="home__a" href="{% url 'feedback' %}">Оставь обратную связь</a></div>
+    <div class="link"><a style="text-decoration: none;" class="home__a" href="{% url 'help_chat' %}">Связь с администратором</a></div>
+
+    </footer>
+{% endblock %}
